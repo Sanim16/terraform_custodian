@@ -210,6 +210,22 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
+resource "aws_lambda_layer_version" "custodian_layer" {
+  layer_name = "custodian-layer"
+  # s3_bucket  = aws_s3_bucket.custodian_bucket.id
+  # s3_key     = aws_s3_object.my_file_upload.key
+
+  compatible_runtimes = ["python3.9"]
+
+  description = "Cloud Custodian (c7n) Lambda Layer"
+
+  # Path to the zip file that contains the c7n package
+  filename            = "build/custodian_lambda.zip"
+  
+  # This ensures the lambda layer is updated only if the zip file changes
+  source_code_hash    = filebase64sha256("build/custodian_lambda.zip")
+}
+
 resource "aws_lambda_function" "custodian" {
   function_name = "custodian-policy-runner"
   role          = aws_iam_role.custodian_lambda_role.arn
@@ -221,6 +237,11 @@ resource "aws_lambda_function" "custodian" {
   filename         = "${path.module}/build/custodian_lambda.zip"
   # source_code_hash = filebase64sha256("build/custodian_lambda.zip")
   source_code_hash = filebase64sha256("${path.module}/build/custodian_lambda.zip")
+
+  # Include the layer containing the Cloud Custodian (c7n) dependency
+  layers = [
+    aws_lambda_layer_version.custodian_layer.arn
+  ]
 }
 
 resource "aws_cloudwatch_event_rule" "custodian_schedule" {
