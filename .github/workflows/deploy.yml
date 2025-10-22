@@ -35,7 +35,6 @@ jobs:
         run: ./scripts/package_lambda.sh
 
       - name: Initialize Terraform
-        working-directory: terraform
         run: terraform init
 
       - name: Plan Terraform
