@@ -247,7 +247,7 @@ resource "aws_lambda_function" "custodian" {
 resource "aws_cloudwatch_event_rule" "custodian_schedule" {
   name                = "custodian-daily-rule"
   # schedule_expression = "cron(0 1 * * ? *)"  # Runs daily at 01:00 UTC
-  schedule_expression = "rate(1 hour)" # You can adjust this to your needs
+  schedule_expression = "rate(10 minutes)" # You can adjust this to your needs
 }
 
 resource "aws_cloudwatch_event_target" "lambda_target" {
