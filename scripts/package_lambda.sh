@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-BUILD_DIR="terraform/build"
+BUILD_DIR="build"
 LAMBDA_DIR="lambda"
 ZIP_FILE="$BUILD_DIR/custodian_lambda.zip"
 
