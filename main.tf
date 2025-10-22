@@ -183,6 +183,14 @@ provider "aws" {
   region = "us-east-1"
 }
 
+terraform {
+  backend "s3" {
+    bucket = "momoh-custodian-policies-bucket-12345"
+    key    = "custodian-lambda/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
 resource "aws_iam_role" "custodian_lambda_role" {
   name = "custodian-lambda-role"
   assume_role_policy = jsonencode({
