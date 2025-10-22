@@ -33,7 +33,7 @@ docker run --rm -v "$PWD/$LAMBDA_DIR":/var/task -w /var/task \
   --entrypoint /bin/bash \
   public.ecr.aws/lambda/python:3.9 \
   -c "
-    apt-get update && apt-get install -y zip && \
+    yum install -y zip && \
     pip install -r requirements.txt -t ./package && \
     cp handler.py custodian-policy.yml ./package && \
     cd package && \
