@@ -1,8 +1,0 @@
-# policies/ec2-stop-unused.yml
-policies:
-  - name: stop-untagged-ec2
-    resource: aws.ec2
-    filters:
-      - "tag:Owner": present
-    actions:
-      - stop

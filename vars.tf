@@ -1,20 +1,29 @@
-# variable "vpc_name" {
-#   description = "The name of the vpc"
-#   default     = "dev-vpc"
-# }
+variable "name" {
+  description = "The name of the resource"
+  default     = "custodian-poc"
+}
 
-# variable "vpc_cidr" {
-#   type        = string
-#   description = "cidr block for the vpc"
-#   default     = "10.0.0.0/16"
-# }
+variable "vpc_name" {
+  description = "The name of the vpc"
+  default     = "custodian-vpc"
+}
 
-# variable "subnet_cidr" {
-#   type        = string
-#   description = "cidr block for the subnet"
-#   default     = "10.0.1.0/24"
-# }
+variable "vpc_cidr" {
+  type        = string
+  description = "cidr block for the vpc"
+  default     = "10.0.0.0/16"
+}
 
-# variable "region" {
-#   default = "us-east-1"
-# }
+variable "subnet_cidr" {
+  type        = string
+  description = "cidr block for the subnet"
+  default     = "10.0.1.0/24"
+}
+
+variable "region" {
+  default = "us-east-1"
+}
+
+variable "kubernetes_version" {
+  default = "1.33"
+}

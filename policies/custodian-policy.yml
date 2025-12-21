@@ -1,0 +1,143 @@
+policies:
+  - name: offhours-stop-ec2-extended
+    resource: ec2
+    filters:
+      - "tag:CustodianOffHours": Extended hours     # match tag + value
+      - type: offhour
+        tag: CustodianOffHours       # tag that contains the offhour schedule
+        default_tz: gmt
+        offhour: 20
+        weekends: false
+    actions:
+      - stop
+
+  - name: onhours-stop-ec2-extended
+    resource: ec2
+    filters:
+      - "tag:CustodianOffHours": Extended hours     # match tag + value
+      - type: onhour
+        tag: CustodianOffHours       # tag that contains the offhour schedule
+        default_tz: gmt
+        onhour: 07
+        weekends: false
+    actions:
+      - start
+
+
+  - name: offhours-stop-ec2-default
+    resource: ec2
+    filters:
+      - "tag:CustodianOffHours": Default     # match tag + value
+      - type: offhour
+        tag: CustodianOffHours       # tag that contains the offhour schedule
+        default_tz: gmt
+        offhour: 19
+        weekends: false
+    actions:
+      - stop
+
+  - name: onhours-stop-ec2-default
+    resource: ec2
+    filters:
+      - "tag:CustodianOffHours": Default     # match tag + value
+      - type: onhour
+        tag: CustodianOffHours       # tag that contains the offhour schedule
+        default_tz: gmt
+        onhour: 8
+        weekends: false
+    actions:
+      - start
+
+  - name: offhours-stop-asg-default
+    resource: asg
+    filters:
+       - "tag:CustodianOffHours": Default
+       - type: offhour
+         tag: CustodianOffHours
+         default_tz: gmt
+         offhour: 19
+         weekends: false
+    actions:
+      - suspend
+
+  - name: offhours-start-asg-default
+    resource: asg
+    filters:
+      - "tag:CustodianOffHours": Default
+      - type: onhour
+        tag: CustodianOffHours
+        default_tz: gmt
+        onhour: 8
+        weekends: false
+    actions:
+      - resume
+
+
+
+# # policies/ec2-stop-unused.yml
+# policies:
+#   - name: offhours-stop-ec2
+#     resource: ec2
+#     filters:
+#        - type: offhour
+#          tag: CustodianOffHours
+#          default_tz: pt
+#          offhour: 02
+#          weekends: false
+#     actions:
+#       - stop
+
+#   - name: offhours-start-ec2
+#     resource: ec2
+#     filters:
+#       - type: onhour
+#         tag: CustodianOffHours
+#         default_tz: pt
+#         onhour: 03
+#         weekends: false
+#     actions:
+#       - start
+
+#   - name: offhours-stop-asg
+#     resource: asg
+#     filters:
+#        - type: offhour
+#          tag: CustodianOffHours
+#          default_tz: pt
+#          offhour: 02
+#          weekends: false
+#     actions:
+#       - suspend
+
+#   - name: offhours-start-asg
+#     resource: asg
+#     filters:
+#       - type: onhour
+#         tag: CustodianOffHours
+#         default_tz: pt
+#         onhour: 03
+#         weekends: false
+#     actions:
+#       - resume
+
+#   - name: offhours-stop-rds
+#     resource: rds
+#     filters:
+#        - type: offhour
+#          tag: CustodianOffHours
+#          default_tz: pt
+#          offhour: 02
+#          weekends: false
+#     actions:
+#       - stop
+
+#   - name: offhours-start-rds
+#     resource: rds
+#     filters:
+#       - type: onhour
+#         tag: CustodianOffHours
+#         default_tz: pt
+#         onhour: 03
+#         weekends: false
+#     actions:
+#       - start
