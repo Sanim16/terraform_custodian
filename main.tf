@@ -32,7 +32,7 @@ resource "aws_cloudwatch_log_group" "custodian_lambda_function_cloudwatch" {
 resource "aws_scheduler_schedule" "custodian_schedule" {
   name                         = "custodian-rule"
   schedule_expression_timezone = "GMT"
-  schedule_expression          = "cron(05 07,08,19,20 ? * MON-SUN *)"
+  schedule_expression          = "cron(05 05,07,19,21 ? * MON-SUN *)"
   flexible_time_window {
     mode = "OFF"
   }

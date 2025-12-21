@@ -151,25 +151,17 @@ Policies are idempotent, schedule-aware, and safe to run repeatedly.
 
 ## CI/CD
 
-Fully automated via GitHub Actions
-
-Terraform validation and deployment handled in pipeline
-
-No manual AWS console interaction required
-
-Artifacts packaged outside Terraform to ensure deterministic builds
-
+- Fully automated via GitHub Actions
+- Terraform validation and deployment handled in pipeline
+- No manual AWS console interaction required
+- Artifacts packaged outside Terraform to ensure deterministic builds
 ## Why This Project
 
 This project reflects real-world cloud governance and platform engineering patterns, including:
-
-Automated cost optimization
-
-Safe, tag-based enforcement
-
-Serverless scheduling
-
-Production-aligned IaC and CI/CD workflows
+- Automated cost optimization
+- Safe, tag-based enforcement
+- Serverless scheduling
+- Production-aligned IaC and CI/CD workflows
 
 It is intentionally designed to be simple to understand, safe to operate, and easy to extend.
 
@@ -179,3 +171,21 @@ To avoid ongoing AWS costs:
 ```terraform
 terraform destroy -auto-approve
 ```
+
+## 🔮 Future Enhancements
+
+This project is intentionally designed to be extensible. Planned enhancements include:
+
+- **EKS workload governance**
+  - Scale non-production workloads to zero during off-hours
+
+- **Multi-account support**
+  - Centralized Cloud Custodian deployment using AWS Organizations
+
+- **Policy reporting**
+  - CloudWatch metrics and Slack / email notifications
+
+- **Environment-aware scheduling**
+  - Different schedules per environment (dev, test, staging)
+
+These enhancements reflect common enterprise platform engineering patterns.

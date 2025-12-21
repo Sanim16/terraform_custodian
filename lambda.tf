@@ -4,12 +4,10 @@
 resource "aws_lambda_layer_version" "custodian_layer" {
   s3_bucket = aws_s3_bucket.custodian_bucket.id
   s3_key    = aws_s3_object.my_file_upload.key
-  #   filename            = "${path.module}/custodian_layer.zip"
   layer_name          = local.layer_name
   compatible_runtimes = ["${var.runtime}"]
-  depends_on          = [aws_s3_object.my_file_upload] # triggered only if the zip file is uploaded to the bucket
+  depends_on          = [aws_s3_object.my_file_upload]
   source_code_hash    = data.aws_s3_object.layer_object.checksum_sha256
-  #   source_code_hash    = filebase64sha256("${path.module}/custodian_layer.zip")
   description = "Cloud Custodian (c7n) Lambda Layer"
 }
 
@@ -33,7 +31,6 @@ data "archive_file" "lambda_function_archive" {
 resource "aws_lambda_function" "custodian_lambda_function" {
   function_name = var.function_name
   filename      = "${path.module}/lambda_function.zip"
-
   runtime     = var.runtime
   handler     = "custodian.lambda_handler"
   layers      = [aws_lambda_layer_version.custodian_layer.arn]
