@@ -4,11 +4,11 @@ resource "aws_s3_bucket" "custodian_bucket" {
 }
 
 resource "aws_s3_object" "my_file_upload" {
-  bucket      = aws_s3_bucket.custodian_bucket.id
-  key         = "lambda_layers/${local.layer_name}/${local.layer_zip_path}"
-  source      = "${path.module}/${local.layer_zip_path}"
+  bucket = aws_s3_bucket.custodian_bucket.id
+  key    = "lambda_layers/${local.layer_name}/${local.layer_zip_path}"
+  source = "${path.module}/${local.layer_zip_path}"
   # source_hash = filemd5("${path.module}/${local.layer_zip_path}")
-  depends_on  = [null_resource.lambda_layer]
+  depends_on = [null_resource.lambda_layer]
 }
 
 # Upload the Cloud Custodian policy YAML file(s) to S3
