@@ -176,5 +176,3 @@ This project is intentionally designed to be extensible. Planned enhancements in
 
 - **Environment-aware scheduling**
   - Different schedules per environment (dev, test, staging)
-
-These enhancements reflect common enterprise platform engineering patterns.
